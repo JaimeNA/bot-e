@@ -1,4 +1,8 @@
-import { Client } from "discord.js";
+import { REST, Client } from "discord.js";
+import ytdl from 'ytdl-core';
+import * as ytdl from 'ytdl-core';
+import ytdl = require('ytdl-core');
+
 import { config } from "./config";
 import { commands } from "./commands";
 import { deployCommands } from "./deploy-commands";
@@ -13,6 +17,7 @@ client.once("ready", () => {
 
 client.on("guildCreate", async (guild) => {
   await deployCommands({ guildId: guild.id });
+  console.log("Commands deployed!");
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -21,7 +26,7 @@ client.on("interactionCreate", async (interaction) => {
   }
   const { commandName } = interaction;
   if (commands[commandName as keyof typeof commands]) {
-    commands[commandName as keyof typeof commands].execute(interaction);
+    commands[commandName as keyof typeof commands].execute(interaction, client);
   }
 });
 
