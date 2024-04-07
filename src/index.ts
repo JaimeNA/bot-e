@@ -8,7 +8,7 @@ import { commands } from "./commands";
 import { deployCommands } from "./deploy-commands";
 
 const client = new Client({
-  intents: ["Guilds", "GuildMessages", "DirectMessages"],
+  intents: ["Guilds", "GuildMessages", "DirectMessages", "GuildVoiceStates" ],
 });
 
 client.once("ready", () => {
