@@ -9,7 +9,8 @@ export async function execute(interaction: CommandInteraction) {
     const voiceChannel = interaction.member?.voice.channel;
     if (!voiceChannel) return interaction.channel.send('You need to be in a voice channel to stop the music!');
     
-    const connection = getVoiceConnection(voiceChannel.guild.id)
+    const connection = getVoiceConnection(voiceChannel.guild.id);
+    if (!connection) return interaction.reply('An error ocurred while getting the connection.');
     connection.destroy();
     
     return interaction.reply('Music stopped.');
